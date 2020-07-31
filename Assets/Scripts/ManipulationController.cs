@@ -1,41 +1,36 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ManipulationController : MonoBehaviour
 {
-    private bool isPressed = false;
+    private bool pressProcessed = false;
     private bool isDragging = false;
-    private bool pressProccessed = false;
-    private float timeSincePress;
     private PlanetController planetController;
+    private Vector3 pressPos;
+    private float pressTime;
 
-    private float doublePressTime = 0.2f;
+    public float minDragDistance = 0.2f; 
+    public float longTime = 0.5f; 
 
     void Awake()
     {
         planetController = gameObject.GetComponent<PlanetController>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(isPressed && !isDragging && Time.time - timeSincePress > doublePressTime)
+        if(!pressProcessed && Vector3.Distance(pressPos, getPressPos()) > minDragDistance)
         {
             isDragging = true;
-            pressProccessed = true;
+            pressProcessed = true;
         }
 
-        if(!pressProccessed && Time.time - timeSincePress > doublePressTime)
+        if(!pressProcessed && Time.time - pressTime > longTime)
         {
-            planetController.ChangeSize();
-            pressProccessed = true;
+            planetController.SwapGravity();
+            pressProcessed = true;
         }
 
         if(isDragging)
@@ -46,29 +41,31 @@ public class ManipulationController : MonoBehaviour
 
     void WhileDragging()
     {
-       Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-       pos.z = 0;
-       planetController.UpdatePosition(pos);
+       planetController.UpdatePosition(getPressPos());
     }
 
     public void OnMouseDown()
     {
-        pressProccessed = false;
-
-        if(Time.time - timeSincePress <= doublePressTime)
-        {
-            planetController.SwapGravity();
-            pressProccessed = true;
-        }
-
-    	isPressed = true;
-        timeSincePress = Time.time;
+    	pressProcessed = false;
+        pressPos = getPressPos();
+        pressTime = Time.time;
     }
 
     public void OnMouseUp()
     {
-        isPressed = false;
+    	if(!pressProcessed)
+    	{	
+    		planetController.ChangeSize();
+        }
+
         isDragging = false;
-        timeSincePress = Time.time;
+        pressProcessed = true;
+    }
+
+    private Vector3 getPressPos()
+    {
+   		Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+       	pos.z = 0;
+       	return pos;
     }
 }

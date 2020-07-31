@@ -18,7 +18,6 @@ public class StarController : MonoBehaviour
 
     void OnCollect(GameObject star)
     {
-    	Debug.Log(gameObject.GetInstanceID());
     	if(gameObject != null && star.GetInstanceID() == gameObject.GetInstanceID())
     	{
     		Destroy(gameObject);
