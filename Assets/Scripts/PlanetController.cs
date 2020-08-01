@@ -75,18 +75,6 @@ public class PlanetController : MonoBehaviour
         }
     }
 
-    public void UpdatePosition(Vector3 pos)
-    {
-        if(!WillCollideWithAny(pos))
-        {
-            gameObject.transform.position = pos;
-        }
-        else
-        {
-
-        }
-    }
-
     public bool WillCollide(Vector3 posA, GameObject objB)
     {
         Vector3 posB = objB.transform.position;

@@ -9,13 +9,23 @@ public class ManipulationController : MonoBehaviour
     private PlanetController planetController;
     private Vector3 pressPos;
     private float pressTime;
+    private SpriteRenderer borderRenderer;
+
+    private Vector3 lastValidPos;
 
     public float minDragDistance = 0.2f; 
     public float longTime = 0.5f; 
 
+    public GameObject validityBorder;
+    public Sprite validSprite;
+    public Sprite invalidSprite;
+
     void Awake()
     {
         planetController = gameObject.GetComponent<PlanetController>();
+
+        borderRenderer = validityBorder.GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -23,8 +33,7 @@ public class ManipulationController : MonoBehaviour
     {
         if(!pressProcessed && Vector3.Distance(pressPos, getPressPos()) > minDragDistance)
         {
-            isDragging = true;
-            pressProcessed = true;
+            OnDraggingStart();
         }
 
         if(!pressProcessed && Time.time - pressTime > longTime)
@@ -41,7 +50,33 @@ public class ManipulationController : MonoBehaviour
 
     void WhileDragging()
     {
-       planetController.UpdatePosition(getPressPos());
+        Vector3 pos = getPressPos();
+
+        if(!planetController.WillCollideWithAny(pos))
+        {
+            borderRenderer.sprite = validSprite;
+            lastValidPos = pos;
+        }
+        else
+        {
+            borderRenderer.sprite = invalidSprite;
+        }
+
+        gameObject.transform.position = pos;
+    }
+
+    void OnDraggingStart()
+    {
+        isDragging = true;
+        pressProcessed = true;
+        validityBorder.SetActive(true);
+    }
+
+    void OnDraggingEnd()
+    {
+        isDragging = false;
+        validityBorder.SetActive(false);
+        gameObject.transform.position = lastValidPos;
     }
 
     public void OnMouseDown()
@@ -56,6 +91,11 @@ public class ManipulationController : MonoBehaviour
     	if(!pressProcessed)
     	{	
     		planetController.ChangeSize();
+        }
+
+        if(isDragging)
+        {
+            OnDraggingEnd();
         }
 
         isDragging = false;
