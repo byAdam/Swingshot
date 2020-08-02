@@ -21,10 +21,20 @@ public class GameEvents : MonoBehaviour
     }
 
     public event Action<GameObject> OnCollectStar;
-
     public void CollectStar(GameObject star)
     {
     	OnCollectStar.Invoke(star);
     }
 
+    public event Action OnResetLevel;
+    public void ResetLevel()
+    {
+        OnResetLevel.Invoke();
+    }
+
+    public event Action<bool> OnPlayChange;
+    public void PlayChange()
+    {
+        OnPlayChange.Invoke(!LevelManager.instance.isPlaying);
+    }
 }

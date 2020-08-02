@@ -68,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1335531541
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 122ca0b89db056045be240abf3a41a90, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 7401121482406462574}
   - component: {fileID: -7390011117795411507}
   - component: {fileID: 86287275034121659}
+  - component: {fileID: 199672245407952200}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Untagged
@@ -154,8 +155,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1335531541
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0ff6c66ea4c998a4c97851d52511a293, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,7 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 417be904150f93740906a8cb8e819b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMoveable: 0
   isAnti: 0
   mass: 0
   scale: 0
@@ -219,3 +219,24 @@ MonoBehaviour:
   validityBorder: {fileID: 3313914396496268336}
   validSprite: {fileID: 21300000, guid: bb06af49c0706b54baf3a4a6f769ea83, type: 3}
   invalidSprite: {fileID: 21300000, guid: 122ca0b89db056045be240abf3a41a90, type: 3}
+--- !u!50 &199672245407952200
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7401121482406462572}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

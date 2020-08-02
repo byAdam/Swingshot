@@ -9,8 +9,12 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance {get; private set;}
 
-	public List<GameObject> planets = new List<GameObject>();
-    public List<GameObject> stars = new List<GameObject>();
+	public List<GameObject> planets {get; private set;} = new List<GameObject>();
+    public List<GameObject> stars {get; private set;} = new List<GameObject>();
+
+    public bool isPlaying = false;
+    public GameObject rocket;
+    private Vector3 rocketStartPosition;
 
     void Awake()
     { 
@@ -22,6 +26,10 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        GameEvents.instance.OnPlayChange += OnPlayChange;
+
+        rocketStartPosition = rocket.transform.position;
     }
 
     // Start is called before the first frame update
@@ -47,25 +55,11 @@ public class LevelManager : MonoBehaviour
     {
            
     }
-
-    public void PlacePlanet(Vector3 pos)
-    {
-
-    }
-
     void AddPlanet(GameObject planet)
     {
     	if(!planets.Contains(planet))
     	{
     		planets.Add(planet);
-    	}
-    }
-
-    void RemovePlanet(GameObject planet)
-    {
-    	if(planets.Contains(planet))
-    	{
-    		planets.Remove(planet);
     	}
     }
 
@@ -93,5 +87,29 @@ public class LevelManager : MonoBehaviour
         {
             Debug.Log("win");
         }
+    }
+
+    void OnPlayChange(bool isPlaying)
+    {
+        this.isPlaying = isPlaying;
+
+        if(this.isPlaying)
+        {
+            OnPlayStart();
+        }
+        else
+        {
+            OnPlayEnd();
+        }
+    }
+
+    void OnPlayStart()
+    {
+        rocket.transform.position = rocketStartPosition;
+    }
+
+    void OnPlayEnd()
+    {
+
     }
 }

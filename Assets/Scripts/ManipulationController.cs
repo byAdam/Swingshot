@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ManipulationController : MonoBehaviour
 {
-    private bool pressProcessed = false;
+    private bool pressProcessed = true;
     private bool isDragging = false;
     private PlanetController planetController;
     private Vector3 pressPos;
@@ -20,12 +20,22 @@ public class ManipulationController : MonoBehaviour
     public Sprite validSprite;
     public Sprite invalidSprite;
 
+    private bool isEditable = true;
+
     void Awake()
     {
         planetController = gameObject.GetComponent<PlanetController>();
-
         borderRenderer = validityBorder.GetComponent<SpriteRenderer>();
+    }
 
+    void Start()
+    {
+        GameEvents.instance.OnPlayChange += OnPlayChange;
+    }
+
+    void OnPlayChange(bool isPlaying)
+    {
+        isEditable = !isPlaying;
     }
 
     // Update is called once per frame
@@ -81,7 +91,9 @@ public class ManipulationController : MonoBehaviour
 
     public void OnMouseDown()
     {
-    	pressProcessed = false;
+    	// If not editable, silently process press
+        pressProcessed = !isEditable;
+
         pressPos = getPressPos();
         pressTime = Time.time;
     }

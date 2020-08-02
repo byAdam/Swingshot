@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GravityController : MonoBehaviour
 {
-	public float gravitationalConstant = 0.01F;
+	private float gravitationalConstant = 0.01F;
 
+    private Rigidbody2D rigidBody;
 	private LevelManager levelManager;
-	private Rigidbody2D rigidBody;
 
 	void Awake()
 	{
@@ -53,6 +53,6 @@ public class GravityController : MonoBehaviour
 
     private float CalculateAcceleration(float mass, float distance)
     {
-        return gravitationalConstant * (mass / (distance * distance));
+        return gravitationalConstant * (mass / Mathf.Pow(distance, 2));
     }
 }

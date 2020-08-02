@@ -8,6 +8,7 @@ public class StarController : MonoBehaviour
     void Start()
     {
        GameEvents.instance.OnCollectStar += OnCollect;
+       GameEvents.instance.OnPlayChange += OnReset;
     }
 
     // Update is called once per frame
@@ -20,8 +21,16 @@ public class StarController : MonoBehaviour
     {
     	if(gameObject != null && star.GetInstanceID() == gameObject.GetInstanceID())
     	{
-    		Destroy(gameObject);
+    		gameObject.SetActive(false);
     	}
+    }
+
+    void OnReset(bool isPlaying)
+    {
+        if(!isPlaying)
+        {
+            gameObject.SetActive(true);
+        }
     }
 
     void OnDestroy()

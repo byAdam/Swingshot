@@ -17,7 +17,6 @@ public class MassLevel
 
 public class PlanetController : MonoBehaviour
 {
-	public bool isMoveable = false;
     public bool isAnti = false;
 	public float mass = 0;
     public float scale = 1;
@@ -31,14 +30,25 @@ public class PlanetController : MonoBehaviour
     private List<MassLevel> massData = new List<MassLevel>()
     {
         new MassLevel(100, 1),
-        new MassLevel(200, 1.5f),
-        new MassLevel(300, 2),
+        new MassLevel(300, 1.5f),
+        new MassLevel(900, 2),
     };
-    private int massIndex = 0;
+    private int massIndex = -1;
+
+    // Reset variables
+    private Vector3 startPosition;
 
     void Awake()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        startPosition = gameObject.transform.position;
+    }
+
+    void Start()
+    {
+        GameEvents.instance.OnResetLevel += OnReset;
+
+        ChangeSize();
     }
 
     public void ChangeSize()
@@ -50,6 +60,12 @@ public class PlanetController : MonoBehaviour
         }
 
         mass = massData[massIndex].mass;
+
+        if(isAnti)
+        {
+            mass = -mass;
+        }
+
         scale = massData[massIndex].scale;
 
         UpdateScale();
@@ -89,6 +105,12 @@ public class PlanetController : MonoBehaviour
 
     public bool WillCollideWithAny(Vector3 newPos)
     {
+        // Check if too close to rocket
+        if((Vector3.Distance(newPos,LevelManager.instance.rocket.transform.position) - scale * 0.8f) < 1)
+        {
+            return true;
+        }
+
         foreach(GameObject planet in LevelManager.instance.planets)
         {
             if(planet.GetInstanceID() != gameObject.GetInstanceID())
@@ -110,4 +132,20 @@ public class PlanetController : MonoBehaviour
 
         return false;
     }
+
+    public void OnReset()
+    {
+        gameObject.transform.position = startPosition;
+
+        // Reset size
+        massIndex = -1;
+        ChangeSize();
+
+        // Reset gravityness
+        if(isAnti)
+        {
+            SwapGravity(); 
+        }
+    }
+
 }
