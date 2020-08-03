@@ -12,6 +12,9 @@ public class RocketController : MonoBehaviour
     private Animator rocketAnimator;
     public Sprite baseSprite;
 
+    public GameObject destroyParticle;
+    private ParticleSystem destroyParticleSystem;
+
     private bool isPlaying;
 
 	void Awake()
@@ -27,10 +30,11 @@ public class RocketController : MonoBehaviour
     {
         GameEvents.instance.OnPlayChange += OnPlayChange;
 
-        OnPlayChange(false);
+        destroyParticleSystem = destroyParticle.GetComponent<ParticleSystem>();
+        OnPlayEnd(true);
     }
 
-    void Update()
+    void FixedUpdate()
     {
     	// Set rotation based on velcitr
 	 	float newRotation = CalculateRotation(rigidBody.velocity);
@@ -82,8 +86,14 @@ public class RocketController : MonoBehaviour
         rigidBody.simulated = true;
     }
 
-    void OnPlayEnd()
+    void OnPlayEnd(bool isInit = false)
     {
+        if(!isInit)
+        {
+            destroyParticleSystem.transform.position = gameObject.transform.position;
+            destroyParticleSystem.Play();
+        }
+
         spriteRenderer.color = new Color(0.64f, 0.64f, 0.64f, 0.24f);
         spriteRenderer.sprite = baseSprite;
 

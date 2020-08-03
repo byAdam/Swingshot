@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4cb6a08474911d48875787c33c30d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destoryParticle: {fileID: 0}
 --- !u!114 &1353730997947941030
 MonoBehaviour:
   m_ObjectHideFlags: 0

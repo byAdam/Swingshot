@@ -6,11 +6,13 @@ public class MassLevel
 {
     public int mass = 0;
     public float scale = 0;
+    public float spin = 0;
 
-    public MassLevel(int mass, float scale)
+    public MassLevel(int mass, float scale, float spin)
     {
         this.mass = mass;
         this.scale = scale;
+        this.spin = spin;
     }
 
 }
@@ -24,14 +26,15 @@ public class PlanetController : MonoBehaviour
     public Sprite normalSprite;
     public Sprite antiSprite;
 
+    private SpinController spinController;
     private SpriteRenderer spriteRenderer;
     private float radius;
 
     private List<MassLevel> massData = new List<MassLevel>()
     {
-        new MassLevel(100, 1),
-        new MassLevel(300, 1.5f),
-        new MassLevel(900, 2),
+        new MassLevel(100, 1, 0.2f),
+        new MassLevel(300, 1.5f, 0.07f),
+        new MassLevel(900, 2, 0.04f),
     };
     private int massIndex = -1;
 
@@ -41,6 +44,7 @@ public class PlanetController : MonoBehaviour
     void Awake()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spinController = gameObject.GetComponent<SpinController>();
         startPosition = gameObject.transform.position;
     }
 
@@ -53,22 +57,39 @@ public class PlanetController : MonoBehaviour
 
     public void ChangeSize()
     {
-        massIndex++;
-        if(massIndex == massData.Count)
+        int tmpMassIndex = massIndex;
+        tmpMassIndex++;
+        if(tmpMassIndex == massData.Count)
         {
-            massIndex = 0;
+            tmpMassIndex = 0;
         }
 
-        mass = massData[massIndex].mass;
+        if(!WillCollideWithAny(null, massData[tmpMassIndex].scale))
+        {
+            massIndex = tmpMassIndex;
+
+            mass = massData[massIndex].mass;
+
+            if(isAnti)
+            {
+                mass = -mass;
+            }
+
+            scale = massData[massIndex].scale;
+
+            UpdateScale();
+            UpdateSpin();
+        }
+    }
+
+    public void UpdateSpin()
+    {
+        spinController.rps = massData[massIndex].spin;
 
         if(isAnti)
         {
-            mass = -mass;
+            spinController.rps *= -1;
         }
-
-        scale = massData[massIndex].scale;
-
-        UpdateScale();
     }
 
     public void UpdateScale()
@@ -89,24 +110,29 @@ public class PlanetController : MonoBehaviour
         {
             spriteRenderer.sprite = normalSprite;
         }
+
+        UpdateSpin();
     }
 
-    public bool WillCollide(Vector3 posA, GameObject objB)
+    public bool WillCollide(Vector3 posA, float scaleA, GameObject objB)
     {
         Vector3 posB = objB.transform.position;
 
         float distance = Vector3.Distance(posA, posB);
 
         // Collision Radius is scale * 0.8
-        float radii = scale * 0.8f + objB.GetComponent<CircleCollider2D>().radius;
+        float radii = scaleA * 0.8f + objB.GetComponent<CircleCollider2D>().radius;
 
         return distance < radii;
     }
 
-    public bool WillCollideWithAny(Vector3 newPos)
+    public bool WillCollideWithAny(Vector3? posArg = null, float? scaleArg = null)
     {
+        Vector3 newPos = posArg ?? transform.position;
+        float newScale = scaleArg ?? scale;
+
         // Check if too close to rocket
-        if((Vector3.Distance(newPos,LevelManager.instance.rocket.transform.position) - scale * 0.8f) < 1)
+        if((Vector3.Distance(newPos,LevelManager.instance.rocket.transform.position) - newScale * 0.8f) < 1)
         {
             return true;
         }
@@ -115,7 +141,7 @@ public class PlanetController : MonoBehaviour
         {
             if(planet.GetInstanceID() != gameObject.GetInstanceID())
             {
-                if(WillCollide(newPos, planet))
+                if(WillCollide(newPos, newScale, planet))
                 {
                     return true;
                 }
@@ -124,7 +150,7 @@ public class PlanetController : MonoBehaviour
 
         foreach(GameObject star in LevelManager.instance.stars)
         {
-            if(WillCollide(newPos, star))
+            if(WillCollide(newPos, newScale, star))
             {
                 return true;
             }

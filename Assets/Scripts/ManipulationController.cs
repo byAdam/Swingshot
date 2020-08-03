@@ -12,6 +12,7 @@ public class ManipulationController : MonoBehaviour
     private SpriteRenderer borderRenderer;
 
     private Vector3 lastValidPos;
+    private SpriteRenderer spriteRenderer;
 
     public float minDragDistance = 0.2f; 
     public float longTime = 0.5f; 
@@ -26,6 +27,7 @@ public class ManipulationController : MonoBehaviour
     {
         planetController = gameObject.GetComponent<PlanetController>();
         borderRenderer = validityBorder.GetComponent<SpriteRenderer>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Start()
@@ -80,6 +82,9 @@ public class ManipulationController : MonoBehaviour
         isDragging = true;
         pressProcessed = true;
         validityBorder.SetActive(true);
+
+        borderRenderer.sortingLayerName = "Planet Drag";
+        spriteRenderer.sortingLayerName = "Planet Drag";
     }
 
     void OnDraggingEnd()
@@ -87,6 +92,9 @@ public class ManipulationController : MonoBehaviour
         isDragging = false;
         validityBorder.SetActive(false);
         gameObject.transform.position = lastValidPos;
+
+        borderRenderer.sortingLayerName = "Planet";
+        spriteRenderer.sortingLayerName = "Planet";
     }
 
     public void OnMouseDown()

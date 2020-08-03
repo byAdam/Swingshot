@@ -52,3 +52,9 @@ TagManager:
   - name: Planets
     uniqueID: 2959435755
     locked: 0
+  - name: Rocket
+    uniqueID: 612858415
+    locked: 0
+  - name: Planet Drag
+    uniqueID: 1242721115
+    locked: 0

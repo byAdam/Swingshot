@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class StarController : MonoBehaviour
 {
+    public GameObject destoryParticle;
+
+    private ParticleSystem destoryParticleSystem;
+
+
     // Start is called before the first frame update
     void Start()
     {
        GameEvents.instance.OnCollectStar += OnCollect;
        GameEvents.instance.OnPlayChange += OnReset;
+
+       destoryParticleSystem = destoryParticle.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -21,7 +28,10 @@ public class StarController : MonoBehaviour
     {
     	if(gameObject != null && star.GetInstanceID() == gameObject.GetInstanceID())
     	{
-    		gameObject.SetActive(false);
+            destoryParticleSystem.transform.position = gameObject.transform.position;
+            destoryParticleSystem.Play();
+
+            gameObject.SetActive(false);
     	}
     }
 
@@ -31,10 +41,5 @@ public class StarController : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
-    }
-
-    void OnDestroy()
-    {
-    	GameEvents.instance.OnCollectStar -= OnCollect;
     }
 }

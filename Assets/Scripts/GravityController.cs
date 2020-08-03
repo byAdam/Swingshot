@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GravityController : MonoBehaviour
 {
-	private float gravitationalConstant = 0.01F;
+	private float gravitationalConstant = 0.02F;
 
     private Rigidbody2D rigidBody;
 	private LevelManager levelManager;
@@ -20,7 +20,7 @@ public class GravityController : MonoBehaviour
 	}
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float velocityChangeX = 0;
         float velocityChangeY = 0;
