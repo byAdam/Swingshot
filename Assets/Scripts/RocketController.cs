@@ -54,8 +54,8 @@ public class RocketController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
     	GameObject other = collision.gameObject;
-
-    	if(other.GetComponent<PlanetController>() != null)
+        // If planet or Level Border
+    	if(other.GetComponent<PlanetController>() != null || other.tag == "LevelBorder")
     	{
     		GameEvents.instance.PlayChange();
     	}

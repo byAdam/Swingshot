@@ -120,8 +120,8 @@ public class PlanetController : MonoBehaviour
 
         float distance = Vector3.Distance(posA, posB);
 
-        // Collision Radius is scale * 0.8
-        float radii = scaleA * 0.8f + objB.GetComponent<CircleCollider2D>().radius;
+        // Collision Radius is scale * 1.3
+        float radii = scaleA * 1.3f + objB.GetComponent<CircleCollider2D>().radius;
 
         return distance < radii;
     }
@@ -132,7 +132,7 @@ public class PlanetController : MonoBehaviour
         float newScale = scaleArg ?? scale;
 
         // Check if too close to rocket
-        if((Vector3.Distance(newPos,LevelManager.instance.rocket.transform.position) - newScale * 0.8f) < 1)
+        if((Vector3.Distance(newPos,LevelManager.instance.rocket.transform.position) - newScale * 1.8f) < 1)
         {
             return true;
         }

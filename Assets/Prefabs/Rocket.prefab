@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7753251018881267580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5, y: 0, z: 0}
+  m_LocalPosition: {x: -11.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSprite: {fileID: -9158349384845336690, guid: 0d695c60811e5fa42af51672c9fa1905,
     type: 3}
+  destroyParticle: {fileID: 0}
 --- !u!50 &3554635876220310183
 Rigidbody2D:
   serializedVersion: 4
@@ -136,7 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1c1c0616cdc8f646ae98d2664da6728, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravitationalConstant: 0.1
 --- !u!58 &-1804334561480607712
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.9
 --- !u!111 &3770314690655693144
 Animation:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ValidityBorder
   - Rocket
+  - LevelBorder
   layers:
   - Default
   - TransparentFX
