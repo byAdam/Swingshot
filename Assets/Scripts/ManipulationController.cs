@@ -63,6 +63,9 @@ public class ManipulationController : MonoBehaviour
     void WhileDragging()
     {
         Vector3 pos = getPressPos();
+        pos.x = Mathf.Round(pos.x * 2)/2;
+        pos.y = Mathf.Round(pos.y * 2)/2;
+
 
         if(!planetController.WillCollideWithAny(pos))
         {
