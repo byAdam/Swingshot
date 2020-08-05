@@ -100,6 +100,11 @@ public class PlanetController : MonoBehaviour
                 UpdateSpin();
             }
         }
+        else
+        {
+            massIndex++;
+            ChangeSize();
+        }
     }
 
     public void UpdateSpin()
@@ -151,6 +156,11 @@ public class PlanetController : MonoBehaviour
         Vector3 newPos = posArg ?? transform.position;
         float newScale = scaleArg ?? scale;
 
+        if(WillCollideWithBorder(newPos, newScale))
+        {
+            return true;
+        }
+
         // Check if too close to rocket
         if((Vector3.Distance(newPos,LevelManager.instance.rocket.transform.position) - newScale * 1.8f) < 1)
         {
@@ -177,6 +187,14 @@ public class PlanetController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public bool WillCollideWithBorder(Vector3? posArg = null, float? scaleArg = null)
+    {
+        Vector3 newPos = posArg ?? transform.position;
+        float newScale = scaleArg ?? scale;
+
+        return (Mathf.Abs(newPos.x) + newScale * 1.3f) > 14 || (Mathf.Abs(newPos.y) + newScale * 1.3f) > 8;
     }
 
     public void OnReset()

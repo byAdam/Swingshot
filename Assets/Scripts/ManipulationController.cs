@@ -66,6 +66,12 @@ public class ManipulationController : MonoBehaviour
         pos.x = Mathf.Round(pos.x/2)*2;
         pos.y = Mathf.Round(pos.y/2)*2;
 
+        // If outside border
+        if(planetController.WillCollideWithBorder(pos))
+        {
+            return;
+        }
+
         if(!planetController.WillCollideWithAny(pos))
         {
             borderRenderer.sprite = validSprite;
