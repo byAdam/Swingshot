@@ -184,7 +184,7 @@ MonoBehaviour:
   isFixed: 1
   isMassless: 0
   normalSprite: {fileID: 21300000, guid: fce6c9fb531b65a418fde3bee15ff108, type: 3}
-  antiSprite: {fileID: 21300000, guid: c3b4e0c4136a19441bd10e23c21775c6, type: 3}
+  antiSprite: {fileID: 21300000, guid: e88f4aaa3a9ea0044ab976a46201fee4, type: 3}
   startMassIndex: 0
 --- !u!58 &2200108479539961127
 CircleCollider2D:

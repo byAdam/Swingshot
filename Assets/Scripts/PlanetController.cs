@@ -35,7 +35,7 @@ public class PlanetController : MonoBehaviour
     private List<MassLevel> massData = new List<MassLevel>()
     {
         new MassLevel(100, 1, 0.2f),
-        new MassLevel(300, 1.5f, 0.07f),
+        new MassLevel(300, 1.4f, 0.07f),
         new MassLevel(900, 2.5f, 0.04f),
     };
 
@@ -55,7 +55,8 @@ public class PlanetController : MonoBehaviour
     void Start()
     {   
         massIndex = startMassIndex - 1;
-        ChangeSize();  
+        ChangeSize();
+        UpdateSprite();
 
         if(!isFixed)
         {
@@ -127,6 +128,12 @@ public class PlanetController : MonoBehaviour
         isAnti = !isAnti;
         mass = -mass;
 
+        UpdateSprite();
+        UpdateSpin();
+    }
+
+    void UpdateSprite()
+    {
         if(isAnti)
         {
             spriteRenderer.sprite = antiSprite;
@@ -135,8 +142,6 @@ public class PlanetController : MonoBehaviour
         {
             spriteRenderer.sprite = normalSprite;
         }
-
-        UpdateSpin();
     }
 
     public bool WillCollide(Vector3 posA, float scaleA, GameObject objB)
