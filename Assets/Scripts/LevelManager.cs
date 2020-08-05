@@ -26,9 +26,6 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        GameEvents.instance.OnPlayChange += OnPlayChange;
-
         rocketStartPosition = rocket.transform.position;
     }
 
@@ -47,7 +44,9 @@ public class LevelManager : MonoBehaviour
             AddStar(star.gameObject);
         }
 
-        GameEvents.instance.OnCollectStar += OnCollectStar;
+        GameEvents.instance.OnCollectStar += OnCollectStar;        
+        GameEvents.instance.OnPlayChange += OnPlayChange;
+
     }
 
     // Update is called once per frame

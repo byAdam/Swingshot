@@ -1,0 +1,3 @@
+Assign rocket to levelmanager
+assign destroy to star
+assign rocket to rocket controller

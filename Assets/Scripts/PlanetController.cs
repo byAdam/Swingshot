@@ -20,8 +20,10 @@ public class MassLevel
 public class PlanetController : MonoBehaviour
 {
     public bool isAnti = false;
-	public float mass = 0;
-    public float scale = 1;
+    public bool isFixed = false;
+    public bool isMassless = false;
+	public float mass{get; private set;} = 100;
+    public float scale{get; private set;} = 1;
 
     public Sprite normalSprite;
     public Sprite antiSprite;
@@ -36,7 +38,9 @@ public class PlanetController : MonoBehaviour
         new MassLevel(300, 1.5f, 0.07f),
         new MassLevel(900, 2, 0.04f),
     };
-    private int massIndex = -1;
+
+    public int startMassIndex = 0;
+    private int massIndex;
 
     // Reset variables
     private Vector3 startPosition;
@@ -49,10 +53,14 @@ public class PlanetController : MonoBehaviour
     }
 
     void Start()
-    {
-        GameEvents.instance.OnResetLevel += OnReset;
+    {   
+        massIndex = startMassIndex - 1;
+        ChangeSize();  
 
-        ChangeSize();
+        if(!isFixed)
+        {
+            GameEvents.instance.OnResetLevel += OnReset;
+        }
     }
 
     public void ChangeSize()
@@ -62,6 +70,14 @@ public class PlanetController : MonoBehaviour
         if(tmpMassIndex == massData.Count)
         {
             tmpMassIndex = 0;
+        }
+
+        //Massless
+        if(isMassless)
+        {
+            mass = 0;
+            scale = 1;
+            return;
         }
 
         if(!WillCollideWithAny(null, massData[tmpMassIndex].scale))
@@ -78,7 +94,11 @@ public class PlanetController : MonoBehaviour
             scale = massData[massIndex].scale;
 
             UpdateScale();
-            UpdateSpin();
+
+            if(!isFixed)
+            {
+                UpdateSpin();
+            }
         }
     }
 
