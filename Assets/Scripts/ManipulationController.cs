@@ -63,9 +63,8 @@ public class ManipulationController : MonoBehaviour
     void WhileDragging()
     {
         Vector3 pos = getPressPos();
-        pos.x = Mathf.Round(pos.x * 2)/2;
-        pos.y = Mathf.Round(pos.y * 2)/2;
-
+        pos.x = Mathf.Round(pos.x/2)*2;
+        pos.y = Mathf.Round(pos.y/2)*2;
 
         if(!planetController.WillCollideWithAny(pos))
         {
@@ -88,6 +87,8 @@ public class ManipulationController : MonoBehaviour
 
         borderRenderer.sortingLayerName = "Planet Drag";
         spriteRenderer.sortingLayerName = "Planet Drag";
+
+        GameEvents.instance.DragChange(true);
     }
 
     void OnDraggingEnd()
@@ -98,6 +99,8 @@ public class ManipulationController : MonoBehaviour
 
         borderRenderer.sortingLayerName = "Planet";
         spriteRenderer.sortingLayerName = "Planet";
+
+        GameEvents.instance.DragChange(false);
     }
 
     public void OnMouseDown()

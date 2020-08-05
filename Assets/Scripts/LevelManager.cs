@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
 
     public bool isPlaying = false;
     public GameObject rocket;
+    public GameObject grid;
     private Vector3 rocketStartPosition;
 
     void Awake()
@@ -46,6 +47,7 @@ public class LevelManager : MonoBehaviour
 
         GameEvents.instance.OnCollectStar += OnCollectStar;        
         GameEvents.instance.OnPlayChange += OnPlayChange;
+        GameEvents.instance.OnDragChange += OnDragChange;
 
     }
 
@@ -110,5 +112,10 @@ public class LevelManager : MonoBehaviour
     void OnPlayEnd()
     {
 
+    }
+
+    void OnDragChange(bool isDragging)
+    {
+        grid.SetActive(isDragging);
     }
 }

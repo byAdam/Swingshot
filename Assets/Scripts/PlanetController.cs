@@ -36,7 +36,7 @@ public class PlanetController : MonoBehaviour
     {
         new MassLevel(100, 1, 0.2f),
         new MassLevel(300, 1.5f, 0.07f),
-        new MassLevel(900, 2, 0.04f),
+        new MassLevel(900, 2.5f, 0.04f),
     };
 
     public int startMassIndex = 0;

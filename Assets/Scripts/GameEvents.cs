@@ -37,4 +37,10 @@ public class GameEvents : MonoBehaviour
     {
         OnPlayChange.Invoke(!LevelManager.instance.isPlaying);
     }
+
+    public event Action<bool> OnDragChange;
+    public void DragChange(bool isDragging)
+    {
+        OnDragChange.Invoke(isDragging);
+    }
 }

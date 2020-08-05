@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
 
         if(ratio < 1.6)
         {
-            cam.orthographicSize = 14.4f / ratio;
+            cam.orthographicSize = 9f * 1.6f / ratio;
         }
         else
         {
