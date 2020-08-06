@@ -10,6 +10,8 @@ public class GravityController : MonoBehaviour
     private Rigidbody2D rigidBody;
 	private LevelManager levelManager;
 
+    private static float roundConstant = Mathf.Pow(10, 7);
+
 	void Awake()
 	{
 		rigidBody = gameObject.GetComponent<Rigidbody2D>();
@@ -23,9 +25,6 @@ public class GravityController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float velocityChangeX = 0;
-        float velocityChangeY = 0;
-
         Vector2 currentPos = transform.position;
         foreach (GameObject planet in levelManager.planets)
         {
@@ -38,13 +37,18 @@ public class GravityController : MonoBehaviour
             float acceleration = CalculateAcceleration(mass, distance);
             float angle = CalculateAngle(currentPos, planetPos);
 
-            velocityChangeX += acceleration * Mathf.Cos(angle);
-            velocityChangeY += acceleration * Mathf.Sin(angle);
+            float accelerationX = acceleration * Mathf.Cos(angle);
+            float accelerationY = acceleration * Mathf.Sin(angle);
+
+            accelerationX = Mathf.Round(accelerationX * roundConstant) / roundConstant;
+            accelerationY = Mathf.Round(accelerationY * roundConstant) / roundConstant;
+
+            Vector3 force = new Vector2(accelerationX, accelerationY);
+
+            rigidBody.AddForce(force, ForceMode2D.Impulse);
         }
 
-        Vector2 currentVelocity = rigidBody.velocity;
-        Vector2 newVelocity = new Vector2(currentVelocity.x + velocityChangeX, currentVelocity.y + velocityChangeY);
-        rigidBody.velocity = newVelocity;
+        
     }
 
     private float CalculateAngle(Vector2 me, Vector2 target)
