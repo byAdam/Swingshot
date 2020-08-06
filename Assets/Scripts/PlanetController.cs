@@ -101,7 +101,7 @@ public class PlanetController : MonoBehaviour
                 UpdateSpin();
             }
         }
-        else
+        else if(massIndex != 0)
         {
             massIndex++;
             ChangeSize();
