@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +8,24 @@ public class OrbitController : MonoBehaviour
     public Vector2 orbitPos;
     public float orbitRadius = 8;
     public float rps = 1;
+    public bool isRelative;
 
     private float W;
     private float angle;
 
     void Start()
     {
-        W = rps * Mathf.PI * 2;
+        W = rps * Mathf.PI * 2; 
 
         Vector2 currentPos = transform.position;
+        
+        if(isRelative)
+        {
+            orbitPos.x = currentPos.x + orbitPos.x;
+            orbitPos.y = currentPos.y + orbitPos.y;
+        }
+
+
         angle = CalculateAngle(currentPos, orbitPos) + Mathf.PI;
     }
 
@@ -34,5 +43,6 @@ public class OrbitController : MonoBehaviour
     {
         return Mathf.Atan2(target.y - me.y, target.x - me.x);
     }
-
 }
+
+
