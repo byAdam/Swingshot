@@ -26,6 +26,8 @@ public class OrbitController : MonoBehaviour
  
         Vector2 newPos = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * orbitRadius;
         transform.position = newPos + orbitPos;
+
+        transform.eulerAngles = new Vector3(0, 0, (angle * (180/Mathf.PI)) + 180);
     }
 
     float CalculateAngle(Vector2 me, Vector2 target)
