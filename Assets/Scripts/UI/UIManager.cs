@@ -16,13 +16,12 @@ public class UIManager : MonoBehaviour
     {
         stateImage = stateButton.GetComponent<Image>();
 
-        GameEvents.instance.OnPlayChange += OnPlayChange;
+        LevelEvents.instance.OnPlayChange += OnPlayChange;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDestroy()
     {
-        
+        LevelEvents.instance.OnPlayChange -= OnPlayChange;
     }
 
     void OnPlayChange(bool isPlaying)

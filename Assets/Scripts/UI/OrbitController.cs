@@ -13,17 +13,28 @@ public class OrbitController : MonoBehaviour
     private float W;
     private float angle;
 
+    private float canvasScale;
+
+    public GameObject c;
+
+
     void Start()
     {
+        canvasScale = c.GetComponent<Canvas>().scaleFactor;
+
+
+
         W = rps * Mathf.PI * 2; 
 
         Vector2 currentPos = transform.position;
         
         if(isRelative)
         {
-            orbitPos.x = currentPos.x + orbitPos.x;
-            orbitPos.y = currentPos.y + orbitPos.y;
+            orbitPos.x = currentPos.x + (orbitPos.x * canvasScale);
+            orbitPos.y = currentPos.y + (orbitPos.y * canvasScale);
         }
+
+        orbitRadius = orbitRadius * canvasScale;
 
 
         angle = CalculateAngle(currentPos, orbitPos) + Mathf.PI;

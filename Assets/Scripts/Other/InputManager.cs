@@ -40,10 +40,6 @@ public class InputManager : MonoBehaviour
     	{
     		ProcessHit(hit.transform.gameObject, true);
     	}
-    	else
-    	{
-    		//LevelManager.instance.PlacePlanet(pos);
-    	}
     }
 
     void ProcessHit(GameObject obj, bool isDown)

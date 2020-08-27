@@ -13,26 +13,50 @@ public class LevelManager : MonoBehaviour
     public List<GameObject> stars {get; private set;} = new List<GameObject>();
 
     public bool isPlaying = false;
-    public GameObject rocket;
-    public GameObject grid;
+    public GameObject rocket {get; private set;}
+    private GameObject grid;
     private Vector3 rocketStartPosition;
 
     void Awake()
     { 
-        if(instance == null)
+        if(instance != null)
         {
-            instance = this;
+            Destroy(instance);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-        rocketStartPosition = rocket.transform.position;
+        
+        instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
+        LevelEvents.instance.OnCollectStar += OnCollectStar;        
+        LevelEvents.instance.OnPlayChange += OnPlayChange;
+        LevelEvents.instance.OnDragChange += OnDragChange;
+
+        OnLoad();
+    }
+
+    void OnDestroy()
+    {
+        LevelEvents.instance.OnCollectStar -= OnCollectStar;        
+        LevelEvents.instance.OnPlayChange -= OnPlayChange;
+        LevelEvents.instance.OnDragChange -= OnDragChange;
+    }
+
+    void OnLoad()
+    {
+
+        rocket = GameObject.Find("Rocket");
+        grid = GameObject.Find("Background Grid");
+
+
+        rocketStartPosition = rocket.transform.position;
+
+        planets.Clear();
+        stars.Clear();
+
         PlanetController[] pObjects = GameObject.FindObjectsOfType(typeof(PlanetController)) as PlanetController[];
         foreach(PlanetController planet in pObjects)
         {
@@ -44,18 +68,9 @@ public class LevelManager : MonoBehaviour
         {
             AddStar(star.gameObject);
         }
-
-        GameEvents.instance.OnCollectStar += OnCollectStar;        
-        GameEvents.instance.OnPlayChange += OnPlayChange;
-        GameEvents.instance.OnDragChange += OnDragChange;
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-           
-    }
+
     void AddPlanet(GameObject planet)
     {
     	if(!planets.Contains(planet))
@@ -83,10 +98,12 @@ public class LevelManager : MonoBehaviour
     void OnCollectStar(GameObject star)
     {
         RemoveStar(star);
+        SoundManager.instance.PlayEffect(SoundEffect.CollectStar);
 
         if(stars.Count == 0)
         {
-            Debug.Log("win");
+            SoundManager.instance.PlayEffect(SoundEffect.WinGame);
+            LevelEvents.instance.EndLevel(true);
         }
     }
 
@@ -104,18 +121,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    void OnPlayStart()
-    {
-        rocket.transform.position = rocketStartPosition;
-    }
-
     void OnPlayEnd()
     {
+        SoundManager.instance.PlayEffect(SoundEffect.Crash);
+    }
 
+    void OnPlayStart()
+    {
+        SoundManager.instance.PlayEffect(SoundEffect.StartSim);
+        rocket.transform.position = rocketStartPosition;
     }
 
     void OnDragChange(bool isDragging)
     {
-        grid.SetActive(isDragging);
+        grid.GetComponent<SpriteRenderer>().enabled = isDragging;
     }
 }

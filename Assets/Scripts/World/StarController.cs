@@ -12,10 +12,16 @@ public class StarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       GameEvents.instance.OnCollectStar += OnCollect;
-       GameEvents.instance.OnPlayChange += OnReset;
+       LevelEvents.instance.OnCollectStar += OnCollect;
+       LevelEvents.instance.OnPlayChange += OnReset;
 
        destoryParticleSystem = destoryParticle.GetComponent<ParticleSystem>();
+    }
+
+    void OnDestroy()
+    {
+        LevelEvents.instance.OnCollectStar -= OnCollect;
+        LevelEvents.instance.OnPlayChange -= OnReset;
     }
 
     // Update is called once per frame

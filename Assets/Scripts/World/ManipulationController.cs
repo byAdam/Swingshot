@@ -32,7 +32,7 @@ public class ManipulationController : MonoBehaviour
 
     void Start()
     {
-        GameEvents.instance.OnPlayChange += OnPlayChange;
+        LevelEvents.instance.OnPlayChange += OnPlayChange;
     }
 
     void OnPlayChange(bool isPlaying)
@@ -94,19 +94,31 @@ public class ManipulationController : MonoBehaviour
         borderRenderer.sortingLayerName = "Planet Drag";
         spriteRenderer.sortingLayerName = "Planet Drag";
 
-        GameEvents.instance.DragChange(true);
+        LevelEvents.instance.DragChange(true);
+
+        SoundManager.instance.PlayEffect(SoundEffect.StartMove);
     }
 
     void OnDraggingEnd()
     {
         isDragging = false;
         validityBorder.SetActive(false);
+
+        if(lastValidPos == gameObject.transform.position)
+        {
+            SoundManager.instance.PlayEffect(SoundEffect.GoodMove);
+        }
+        else
+        {
+            SoundManager.instance.PlayEffect(SoundEffect.BadMove);
+        }
+
         gameObject.transform.position = lastValidPos;
 
         borderRenderer.sortingLayerName = "Planet";
         spriteRenderer.sortingLayerName = "Planet";
 
-        GameEvents.instance.DragChange(false);
+        LevelEvents.instance.DragChange(false);
     }
 
     public void OnMouseDown()

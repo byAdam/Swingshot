@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance {get; private set;}
+    public int latestLevel = 1;
+    public int selectedLevel = 0;
 
     void Awake()
      { 
@@ -25,12 +27,34 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.LoadScene("Menu");
+        MenuEvents.instance.OnSelectLevel += OnSelectLevel;
+        LevelEvents.instance.OnEndLevel += OnEndLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void OnSelectLevel(int levelNo)
+    {
+        selectedLevel = levelNo;
+    }
+
+    void OnEndLevel(bool isComplete)
+    {
+        if(isComplete && selectedLevel >= latestLevel)
+        {
+            latestLevel = selectedLevel + 1;
+            SettingsManager.instance.OnUnlockLevel(latestLevel);
+        }
+        
+        OnLevelEnd();
+    }
+
+    void OnLevelEnd()
+    {
+        selectedLevel = 0;
     }
 }

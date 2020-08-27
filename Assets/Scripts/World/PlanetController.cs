@@ -55,16 +55,24 @@ public class PlanetController : MonoBehaviour
     void Start()
     {   
         massIndex = startMassIndex - 1;
-        ChangeSize();
+        ChangeSize(false);
         UpdateSprite();
 
         if(!isFixed)
         {
-            GameEvents.instance.OnResetLevel += OnReset;
+            LevelEvents.instance.OnResetLevel += OnReset;
         }
     }
 
-    public void ChangeSize()
+    void OnDestroy()
+    {
+        if(!isFixed)
+        {
+            LevelEvents.instance.OnResetLevel -= OnReset;
+        }
+    }
+
+    public void ChangeSize(bool isClick = true)
     {
         int tmpMassIndex = massIndex;
         tmpMassIndex++;
@@ -106,6 +114,11 @@ public class PlanetController : MonoBehaviour
             massIndex++;
             ChangeSize();
         }
+
+        if(isClick)
+        {
+            SoundManager.instance.PlayEffect(SoundEffect.ChangeSize);  
+        }
     }
 
     public void UpdateSpin()
@@ -130,6 +143,8 @@ public class PlanetController : MonoBehaviour
 
         UpdateSprite();
         UpdateSpin();
+
+        SoundManager.instance.PlayEffect(SoundEffect.SwapGravity);
     }
 
     void UpdateSprite()

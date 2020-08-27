@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateOrthographicSize();
+        //UpdateOrthographicSize();
     }
 
     void UpdateOrthographicSize()
@@ -24,11 +24,11 @@ public class CameraController : MonoBehaviour
 
         if(ratio < 1.6)
         {
-            cam.orthographicSize = 9f * 1.6f / ratio;
+            cam.orthographicSize = 8.3f * 1.6f / ratio;
         }
         else
         {
-            cam.orthographicSize = 9f;
+            cam.orthographicSize = 8.3f;
         }
         
     }

@@ -28,10 +28,15 @@ public class RocketController : MonoBehaviour
 
     void Start()
     {
-        GameEvents.instance.OnPlayChange += OnPlayChange;
+        LevelEvents.instance.OnPlayChange += OnPlayChange;
 
         destroyParticleSystem = destroyParticle.GetComponent<ParticleSystem>();
         OnPlayEnd(true);
+    }
+
+    void OnDestroy()
+    {
+        LevelEvents.instance.OnPlayChange -= OnPlayChange;
     }
 
     void FixedUpdate()
@@ -57,11 +62,11 @@ public class RocketController : MonoBehaviour
         // If planet or Level Border
     	if(other.GetComponent<PlanetController>() != null || other.tag == "LevelBorder")
     	{
-    		GameEvents.instance.PlayChange();
+    		LevelEvents.instance.PlayChange();
     	}
     	else if(other.GetComponent<StarController>() != null)
     	{
-    		GameEvents.instance.CollectStar(other);
+    		LevelEvents.instance.CollectStar(other);
     	}
     }
 
