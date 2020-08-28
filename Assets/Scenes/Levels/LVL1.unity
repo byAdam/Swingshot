@@ -323,7 +323,7 @@ PrefabInstance:
     - target: {fileID: 7401121482406462575, guid: 1d523ea1ceddcab48a18242a9aab1c58,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7401121482406462575, guid: 1d523ea1ceddcab48a18242a9aab1c58,
         type: 3}
@@ -560,6 +560,63 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 369719770724820162, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833519958117496533, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_text
+      value: 'Move the Planet
+
+        Collect the Star'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3620045960213433152, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733849389610406516, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775482298847066366, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436935298741704221, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436935298741704221, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668396190538685161, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136944459064428589, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435939081296171890, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747043024329726399, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7937245476403385904, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
       propertyPath: m_Name
@@ -625,15 +682,45 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7937245476781953306, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7937245476781953509, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
       propertyPath: orthographic size
       value: 8.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937245476836404842, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937245476836404853, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7937245477100234061, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
       propertyPath: rocket
       value: 
       objectReference: {fileID: 665571607}
+    - target: {fileID: 7937245477413108232, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937245477612530805, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995169168424505578, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f49ecc045bd52fa41bf854167d47204b, type: 3}

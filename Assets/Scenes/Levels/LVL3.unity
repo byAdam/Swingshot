@@ -632,6 +632,56 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 624048027516465147, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_text
+      value: 'Meteors block your path
+
+
+
+
+        Hold planets to invert gravity'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1833519958117496533, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_text
+      value: Asteroid's block
+      objectReference: {fileID: 0}
+    - target: {fileID: 3620045960213433152, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3620045960213433152, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 5436935298741704221, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6136944459064428589, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435939081296171890, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435939081296171890, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 130
+      objectReference: {fileID: 0}
+    - target: {fileID: 6435939081296171890, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 800
+      objectReference: {fileID: 0}
     - target: {fileID: 7937245476403385904, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
       propertyPath: m_Name
@@ -691,6 +741,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937245476836404853, guid: f49ecc045bd52fa41bf854167d47204b,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7937245477100234061, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}

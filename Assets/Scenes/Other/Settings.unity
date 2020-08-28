@@ -355,20 +355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Collect all the stars with the rocket using gravity
-
-    Controls:
-
-    Drag
-    planet to move
-
-    Tap Planet to change mass
-
-    Press Planet to invert gravity
-
-
-    This
-    is a demo by Adam Brady '
+  m_text: No settings at the moment, sorry :(
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06ddc90ca223c1a43981b02a2e448bc9, type: 2}
   m_sharedMaterial: {fileID: -2740778552112969297, guid: 06ddc90ca223c1a43981b02a2e448bc9,
