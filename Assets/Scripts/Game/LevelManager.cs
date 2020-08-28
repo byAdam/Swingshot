@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour
 	public List<GameObject> planets {get; private set;} = new List<GameObject>();
     public List<GameObject> stars {get; private set;} = new List<GameObject>();
 
+    private List<GameObject> starsLeft = new List<GameObject>();
+
     public bool isPlaying = false;
     public GameObject rocket {get; private set;}
     private GameObject grid;
@@ -66,7 +68,7 @@ public class LevelManager : MonoBehaviour
         StarController[] sObjects = GameObject.FindObjectsOfType(typeof(StarController)) as StarController[];
         foreach(StarController star in sObjects)
         {
-            AddStar(star.gameObject);
+            stars.Add(star.gameObject);
         }
     }
 
@@ -79,28 +81,13 @@ public class LevelManager : MonoBehaviour
     	}
     }
 
-    void AddStar(GameObject star)
-    {
-        if(!stars.Contains(star))
-        {
-            stars.Add(star);
-        }
-    }
-
-    void RemoveStar(GameObject star)
-    {
-        if(stars.Contains(star))
-        {
-            stars.Remove(star);
-        }
-    }
-
     void OnCollectStar(GameObject star)
     {
-        RemoveStar(star);
+        starsLeft.Remove(star);
         SoundManager.instance.PlayEffect(SoundEffect.CollectStar);
+        Debug.Log(stars.Count);
 
-        if(stars.Count == 0)
+        if(starsLeft.Count == 0)
         {
             SoundManager.instance.PlayEffect(SoundEffect.WinGame);
             LevelEvents.instance.EndLevel(true);
@@ -110,6 +97,7 @@ public class LevelManager : MonoBehaviour
     void OnPlayChange(bool isPlaying)
     {
         this.isPlaying = isPlaying;
+        starsLeft = new List<GameObject>(stars.Select(x => x));
 
         if(this.isPlaying)
         {

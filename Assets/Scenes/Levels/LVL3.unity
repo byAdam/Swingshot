@@ -645,7 +645,9 @@ PrefabInstance:
     - target: {fileID: 1833519958117496533, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
       propertyPath: m_text
-      value: Asteroid's block
+      value: 'Asteroid
+
+        s block'
       objectReference: {fileID: 0}
     - target: {fileID: 3620045960213433152, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}

@@ -697,7 +697,7 @@ PrefabInstance:
     - target: {fileID: 1833519958117496533, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
       propertyPath: m_text
-      value: Whitehole's push
+      value: Whiteholes push
       objectReference: {fileID: 0}
     - target: {fileID: 5436935298741704221, guid: f49ecc045bd52fa41bf854167d47204b,
         type: 3}
