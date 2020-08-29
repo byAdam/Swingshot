@@ -37,7 +37,13 @@ public class GameSceneManager : MonoBehaviour
         MenuEvents.instance.OnSelectLevel += OnSelectLevel;
         MenuEvents.instance.OnClickMenuButton += OnClickMenuButton;
         MenuEvents.instance.OnClickBack += OnClickBack;
+        MenuEvents.instance.OnClickEditor += OnClickEditor;
         LevelEvents.instance.OnEndLevel += OnEndLevel;
+    }
+
+    void OnClickEditor()
+    {
+        LoadScene("Playground");
     }
 
     void OnSelectLevel(int levelNo)

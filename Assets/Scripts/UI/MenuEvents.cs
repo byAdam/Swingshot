@@ -54,4 +54,10 @@ public class MenuEvents : MonoBehaviour
     {
         instance.OnClickBack.Invoke();
     }
+
+    public event Action OnClickEditor;
+    public void ClickEditor()
+    {
+        instance.OnClickEditor.Invoke();
+    }
 }
