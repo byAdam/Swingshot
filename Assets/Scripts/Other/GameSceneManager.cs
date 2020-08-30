@@ -32,7 +32,12 @@ public class GameSceneManager : MonoBehaviour
 
     void Start()
     {
-        LoadScene("Menu");
+        string activeScene = SceneManager.GetActiveScene().name;
+
+        if(activeScene == "Init")
+        {
+            LoadScene("Menu");
+        }
 
         MenuEvents.instance.OnSelectLevel += OnSelectLevel;
         MenuEvents.instance.OnClickMenuButton += OnClickMenuButton;

@@ -68,4 +68,10 @@ public class LevelEvents : MonoBehaviour
             SoundManager.instance.PlayEffect(SoundEffect.Click);
         }
     }
+
+    public event Action<bool> OnPlaygroundPlanet;
+    public void PlaygroundPlanet(bool isAdd)
+    {
+        instance.OnPlaygroundPlanet.Invoke(isAdd);
+    }
 }

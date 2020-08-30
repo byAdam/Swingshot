@@ -829,6 +829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlaying: 0
+  planetPrefab: {fileID: 7401121482406462572, guid: 1d523ea1ceddcab48a18242a9aab1c58,
+    type: 3}
 --- !u!1 &6136944459064428589
 GameObject:
   m_ObjectHideFlags: 0

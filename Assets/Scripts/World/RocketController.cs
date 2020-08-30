@@ -21,7 +21,6 @@ public class RocketController : MonoBehaviour
 	{
 		rigidBody = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        startPosition = gameObject.transform.position;
         gravityController = gameObject.GetComponent<GravityController>();
         rocketAnimator = gameObject.GetComponent<Animator>();
 	}
@@ -88,7 +87,7 @@ public class RocketController : MonoBehaviour
     {
         spriteRenderer.color = new Color(1, 1, 1, 1);
         rocketAnimator.enabled = true;
-        rigidBody.simulated = true;
+        startPosition = gameObject.transform.position;
     }
 
     void OnPlayEnd(bool isInit = false)
@@ -103,7 +102,6 @@ public class RocketController : MonoBehaviour
         spriteRenderer.sprite = baseSprite;
 
         rocketAnimator.enabled = false;
-        rigidBody.simulated = false;
 
         gameObject.transform.position = startPosition;
         rigidBody.velocity = new Vector3(0, 0, 0);

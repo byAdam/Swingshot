@@ -44,10 +44,9 @@ public class InputManager : MonoBehaviour
 
     void ProcessHit(GameObject obj, bool isDown)
     {
-    	if(obj.GetComponent<PlanetController>() != null)
+        ManipulationController m = obj.GetComponent<ManipulationController>();
+    	if(m != null)
     	{
-    		ManipulationController m = obj.GetComponent<ManipulationController>();
-
     		if(isDown)
     		{
     			m.OnMouseDown();

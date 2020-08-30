@@ -17,7 +17,8 @@ public class LevelManager : MonoBehaviour
     public bool isPlaying = false;
     public GameObject rocket {get; private set;}
     private GameObject grid;
-    private Vector3 rocketStartPosition;
+
+    public GameObject planetPrefab;
 
     void Awake()
     { 
@@ -53,9 +54,6 @@ public class LevelManager : MonoBehaviour
         rocket = GameObject.Find("Rocket");
         grid = GameObject.Find("Background Grid");
 
-
-        rocketStartPosition = rocket.transform.position;
-
         planets.Clear();
         stars.Clear();
 
@@ -73,7 +71,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    void AddPlanet(GameObject planet)
+    public void AddPlanet(GameObject planet)
     {
     	if(!planets.Contains(planet))
     	{
@@ -117,7 +115,6 @@ public class LevelManager : MonoBehaviour
     void OnPlayStart()
     {
         SoundManager.instance.PlayEffect(SoundEffect.StartSim);
-        rocket.transform.position = rocketStartPosition;
     }
 
     void OnDragChange(bool isDragging)

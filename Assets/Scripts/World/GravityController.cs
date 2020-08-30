@@ -10,7 +10,7 @@ public class GravityController : MonoBehaviour
     private Rigidbody2D rigidBody;
 	private LevelManager levelManager;
 
-    private static float roundConstant = Mathf.Pow(10, 7);
+    private static float roundConstant = Mathf.Pow(10, 3);
 
 	void Awake()
 	{
@@ -33,6 +33,7 @@ public class GravityController : MonoBehaviour
 
             Vector2 planetPos = planet.transform.position;
             float distance = Vector2.Distance(currentPos, planetPos);
+            distance = Mathf.Round(distance * roundConstant) / roundConstant;
 
             float acceleration = CalculateAcceleration(mass, distance);
             float angle = CalculateAngle(currentPos, planetPos);

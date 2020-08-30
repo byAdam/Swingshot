@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ManipulationController : MonoBehaviour
 {
@@ -50,7 +51,10 @@ public class ManipulationController : MonoBehaviour
 
         if(!pressProcessed && Time.time - pressTime > longTime)
         {
-            planetController.SwapGravity();
+            if(planetController != null)
+            {
+                planetController.SwapGravity();   
+            }
             pressProcessed = true;
         }
 
@@ -67,12 +71,12 @@ public class ManipulationController : MonoBehaviour
         pos.y = Mathf.Round(pos.y/2)*2;
 
         // If outside border
-        if(planetController.WillCollideWithBorder(pos))
+        if(planetController != null && planetController.WillCollideWithBorder(pos))
         {
             return;
         }
 
-        if(!planetController.WillCollideWithAny(pos))
+        if(planetController == null || !planetController.WillCollideWithAny(pos))
         {
             borderRenderer.sprite = validSprite;
             lastValidPos = pos;
@@ -123,6 +127,7 @@ public class ManipulationController : MonoBehaviour
 
     public void OnMouseDown()
     {
+        Debug.Log(Environment.StackTrace);
     	// If not editable, silently process press
         pressProcessed = !isEditable;
 
@@ -134,7 +139,10 @@ public class ManipulationController : MonoBehaviour
     {
     	if(!pressProcessed)
     	{	
-    		planetController.ChangeSize();
+            if(planetController != null)
+            {
+                planetController.ChangeSize();
+            }
         }
 
         if(isDragging)
