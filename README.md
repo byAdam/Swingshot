@@ -3,7 +3,7 @@
 
 A gravity based puzzle game for Windows and Android.
 
-[Download][https://github.com/byAdam/Swingshot/releases/tag/v0.1.1]
+[**Download**](https://github.com/byAdam/Swingshot/releases/tag/v0.1.1)
 
 ## Images
 ![Screenshot_36](https://github.com/byAdam/Swingshot/assets/6537646/1957bb33-88a1-4a83-a48c-164ba4ec2940)
